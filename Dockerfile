@@ -1,10 +1,6 @@
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build-env
 WORKDIR /app
 
-# Copy csproj and restore as distinct layers
-
-
-# Copy everything else and build
 COPY . ./
 WORKDIR /app/APA3
 RUN dotnet restore
