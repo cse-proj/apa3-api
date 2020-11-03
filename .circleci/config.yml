@@ -49,16 +49,11 @@ jobs:
           image: apa3-api
           registry-url: us.gcr.io
           tag: 0.1.${CIRCLE_BUILD_NUM}
+      - gcp-gcr/tag-image:
+          image: apa3-api
+          registry-url: us.gcr.io
+          source-tag: 0.1.${CIRCLE_BUILD_NUM}
+          target-tag: latest
       - run:
           command: |
             echo "Digest is: $(</tmp/digest.txt)"
-    
-  add_tag_latest:
-    executor: gcp-gcr/default
-    steps:
-      - checkout
-      - gcp-gcr/gcr-auth
-      - gcp-gcr/tag-image:
-        image: apa3-api
-        source-tag: 0.1.${CIRCLE_BUILD_NUM}
-        target-tag: latest
