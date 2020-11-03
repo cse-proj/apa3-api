@@ -107,16 +107,16 @@ resource "google_compute_backend_service" "apa3_api_test_backend_service" {
   }
 }
 
-resource "google_compute_forwarding_rule" "apa3_api_test_lb_frontend" {
-  name = "apa3-api-test-lb-frontend"
-  region = var.region
-  ip_address = google_compute_address.apa3_api_test_lb_static_ip.address
-  ip_protocol = "TCP"
-  load_balancing_scheme = "EXTERNAL"
-  network_tier = "STANDARD"
-  port_range = "80"
-  target = google_compute_target_http_proxy.apa3_api_test_lb_proxy.id
-}
+# resource "google_compute_forwarding_rule" "apa3_api_test_lb_frontend" {
+#   name = "apa3-api-test-lb-frontend"
+#   region = var.region
+#   ip_address = google_compute_address.apa3_api_test_lb_static_ip.address
+#   ip_protocol = "TCP"
+#   load_balancing_scheme = "EXTERNAL"
+#   network_tier = "STANDARD"
+#   port_range = "80"
+#   target = google_compute_target_http_proxy.apa3_api_test_lb_proxy.id
+# }
 
 resource "google_compute_forwarding_rule" "apa3_api_test_lb_frontend-ssl" {
   name = "apa3-api-test-lb-frontend-ssl"
@@ -129,12 +129,12 @@ resource "google_compute_forwarding_rule" "apa3_api_test_lb_frontend-ssl" {
   target = google_compute_target_https_proxy.apa3_api_test_lb_proxy_ssl.id
 }
 
-resource "google_compute_target_http_proxy" "apa3_api_test_lb_proxy" {
-  provider = google-beta
+# resource "google_compute_target_http_proxy" "apa3_api_test_lb_proxy" {
+#   provider = google-beta
 
-  name    = "apa3-api-test-lb-target-proxy"
-  url_map = google_compute_url_map.apa3_api_test_url_map.id
-}
+#   name    = "apa3-api-test-lb-target-proxy"
+#   url_map = google_compute_url_map.apa3_api_test_url_map.id
+# }
 
 resource "google_compute_target_https_proxy" "apa3_api_test_lb_proxy_ssl" {
   provider = google-beta
@@ -154,15 +154,15 @@ resource "google_compute_managed_ssl_certificate" "apa3_api_test_lb_proxy_ssl_ce
   }
 }
 
-resource "google_compute_url_map" "apa3_api_test_url_map" {
-  provider = google-beta
+# resource "google_compute_url_map" "apa3_api_test_url_map" {
+#   provider = google-beta
 
-  name            = "apa3-api-test-url-map"
-  default_url_redirect {
-    https_redirect = true
-    strip_query = false
-  }
-}
+#   name            = "apa3-api-test-url-map"
+#   default_url_redirect {
+#     https_redirect = true
+#     strip_query = false
+#   }
+# }
 
 resource "google_compute_url_map" "apa3_api_test_url_map_ssl" {
   provider = google-beta
