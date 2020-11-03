@@ -14,9 +14,6 @@ workflows:
                 - main
           requires:
             - build
-      - add_tag_latest:
-          requires:
-            - build_and_push_image
 
 jobs:
   build:
