@@ -13,7 +13,7 @@ workflows:
 
 jobs:
   build:
-    working_directory: ~/apa3-api/APA3
+    working_directory: ~/apa3-api
     docker:
       - image: mcr.microsoft.com/dotnet/core/sdk:3.1
     steps:
@@ -21,7 +21,7 @@ jobs:
       - run:
           # Restore
           name: Restore Dependencies and Tools
-          command: pwd & dotnet restore APA3.csproj
+          command: pwd & dotnet restore
       - run:
           # Build Project
           name: Build Project
