@@ -47,6 +47,10 @@ resource "google_compute_instance" "apa3-api-vm-test" {
       network_tier = "STANDARD"     
     }
   }
+
+  service_account {
+    scopes = ["storage-ro"]
+  }
 }
 
 resource "google_dns_record_set" "apa3-test" {
