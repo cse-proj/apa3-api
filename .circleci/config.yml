@@ -29,11 +29,17 @@ jobs:
       
   deploy:
     docker:
-      - image: appsvc/dotnetcore
+      - image: mcr.microsoft.com/dotnet/core/sdk:3.1
     steps:
       - checkout
       - setup_remote_docker:
           docker_layer_caching: false
+      - run:
+          # Install docker
+          - name: Install Docker
+          - command: |
+              sudo apt-get update
+              sudo apt-get install docker-ce docker-ce-cli containerd.io
       - run:
           name: Build and push Docker image to DockerHub
           command: |       
