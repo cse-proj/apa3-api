@@ -7,13 +7,16 @@ workflows:
   build_push:
     jobs:
       - build
+      - approve_image_push:
+          type: approval
+          requires: build
       - build_and_push_image:
           filters:
             branches:
               only:
                 - main
           requires:
-            - build
+            - approve_image_push
 
 jobs:
   build:
