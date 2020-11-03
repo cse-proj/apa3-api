@@ -21,7 +21,7 @@ jobs:
       - run:
           # Restore
           name: Restore Dependencies and Tools
-          command: pwd & dotnet restore
+          command: ls -a . & dotnet restore
       - run:
           # Build Project
           name: Build Project
