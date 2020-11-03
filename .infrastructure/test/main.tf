@@ -87,6 +87,7 @@ resource "google_compute_health_check" "apa3-api-test-http-health-check" {
 
   http_health_check {
     port = 80
+    request_path = "/health"
   }
 }
 
