@@ -29,17 +29,19 @@ jobs:
       
   deploy:
     docker:
-      - image: mcr.microsoft.com/dotnet/core/sdk:3.1
+      # has docker installed
+      - image: circleci/node
     steps:
       - checkout
       - setup_remote_docker:
           docker_layer_caching: false
       - run:
-          # Install docker
-          name: Install Docker
+          name: Install .NET Core SDK
           command: |
-            sudo apt-get update
-            sudo apt-get install docker-ce docker-ce-cli containerd.io
+            sudo apt-get update; \
+            sudo apt-get install -y apt-transport-https && \
+            sudo apt-get update && \
+            sudo apt-get install -y dotnet-sdk-3.1
       - run:
           name: Build and push Docker image to DockerHub
           command: |       
