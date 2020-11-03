@@ -1,9 +1,13 @@
 version: 2.1
+
+orbs:
+  gcp-gcr: circleci/gcp-gcr@0.11.0
+
 workflows:
-  build_deploy:
+  build_push:
     jobs:
       - build
-      - deploy:
+      - build_and_push_image:
           filters:
             branches:
               only:
@@ -27,20 +31,21 @@ jobs:
           name: Build Project
           command: dotnet build --no-restore APA3/APA3.csproj
       
-  deploy:
-    docker:
-      # has docker installed
-      - image: circleci/node
+  build_and_push_image:
+    executor: gcp-gcr/default
     steps:
       - checkout
-      - setup_remote_docker:
-          docker_layer_caching: false
+      - gcp-gcr/gcr-auth
+      - gcp-gcr/build-image:
+          image: apa3-api
+          no_output_timeout: 20m
+          registry-url: us.gcr.io
+          tag: 0.1.${CIRCLE_BUILD_NUM}
+      - gcp-gcr/push-image:
+          digest-path: /tmp/digest.txt
+          image: apa3-api
+          registry-url: us.gcr.io
+          tag: 0.1.${CIRCLE_BUILD_NUM}
       - run:
-          name: Build and push Docker image to DockerHub
-          command: |       
-            echo 'export TAG=0.1.${CIRCLE_BUILD_NUM}' >> $BASH_ENV
-            echo 'export IMAGE_NAME=apa3-api' >> $BASH_ENV
-            source $BASH_ENV
-            docker build -t $DOCKER_USERNAME/$IMAGE_NAME -t $DOCKER_USERNAME/$IMAGE_NAME:$TAG .
-            echo $DOCKER_PWD | docker login -u $DOCKER_USERNAME --password-stdin
-            docker push $DOCKER_USERNAME/$IMAGE_NAME
+          command: |
+            echo "Digest is: $(</tmp/digest.txt)"
