@@ -9,7 +9,8 @@ workflows:
       - build
       - approve_image_push:
           type: approval
-          requires: build
+          requires:
+            - build
       - build_and_push_image:
           filters:
             branches:
