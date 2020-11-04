@@ -469,3 +469,6 @@ plan.txt
 ip_address.txt
 website/vendor
 namecheap.tf
+
+# appsettings local
+appsettings.Local.json
