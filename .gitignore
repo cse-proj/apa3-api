@@ -472,3 +472,6 @@ namecheap.tf
 
 # appsettings local
 appsettings.Local.json
+
+# credentials
+*cred.json
