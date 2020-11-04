@@ -19,6 +19,7 @@ namespace APA3.Controllers
             _logger = logger;
         }
 
+        [Authorize]
         [Route("folders")]
         [Route("")]
         [HttpGet]
@@ -27,12 +28,14 @@ namespace APA3.Controllers
             return Ok();
         }
 
+        [Authorize]
         [HttpGet("files")]
         public IActionResult GetFiles()
         {
             return Ok();
         }
 
+        [Authorize]
         [HttpGet("files/{id}/view")]
         public IActionResult GetFileViewLink(string id)
         {

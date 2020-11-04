@@ -40,6 +40,7 @@ namespace APA3.Controllers
             return Ok();
         }
 
+        [Authorize]
         [Route("updatePassword")]
         [HttpPost]
         public IActionResult UpdatePassword()
