@@ -3,7 +3,7 @@ using System.IO;
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Json;
 
-namespace APA3.Drive.Services
+namespace APA3.GoogleAuth.Services
 {
     public class GoogleServiceAccountOauthService
     {

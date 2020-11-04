@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\APA3.Drive\APA3.Drive.csproj" />
+    <ProjectReference Include="..\APA3.GoogleAuth\APA3.GoogleAuth.csproj" />
   </ItemGroup>
 
 

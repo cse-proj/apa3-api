@@ -11,7 +11,6 @@ namespace APA3.Drive
             services.AddSingleton<FileMapper>()
                 .AddSingleton<FolderMapper>()
                 .AddSingleton<DriveMapper>()
-                .AddSingleton<GoogleServiceAccountOauthService>()
                 .AddSingleton<GoogleDriveService>();
                 
             return services;
