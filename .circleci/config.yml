@@ -27,6 +27,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Add Service Credential
+          command: echo $SERVICE_ACCOUNT_CRED > ./APA3/apa3-account-cred.json
+      - run:
           # Restore
           name: Restore Dependencies and Tools
           command: ls -a . & dotnet restore APA3/APA3.csproj
@@ -36,9 +39,13 @@ jobs:
           command: dotnet build --no-restore APA3/APA3.csproj
       
   build_and_push_image:
+    working_directory: ~/apa3-api
     executor: gcp-gcr/default
     steps:
       - checkout
+      - run:
+        name: Add Service Credential
+        command: echo $SERVICE_ACCOUNT_CRED > ./APA3/apa3-account-cred.json
       - gcp-gcr/gcr-auth
       - gcp-gcr/build-image:
           image: apa3-api

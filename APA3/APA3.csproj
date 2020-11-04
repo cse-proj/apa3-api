@@ -9,5 +9,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\APA3.Drive\APA3.Drive.csproj" />
+  </ItemGroup>
+
 
 </Project>

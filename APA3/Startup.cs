@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using APA3.Drive;
 using APA3.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -37,6 +38,8 @@ namespace APA3
                 options.Authority = authOptions.Authority;
                 options.Audience = authOptions.Audience;
             });
+
+            services.AddDriveService();
 
             services.AddControllers();
 
