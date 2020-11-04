@@ -45,7 +45,8 @@ jobs:
       - checkout
       - run:
         name: Add Service Credential
-        command: echo $SERVICE_ACCOUNT_CRED > ./APA3/apa3-account-cred.json
+        command: |
+          echo $SERVICE_ACCOUNT_CRED > ./APA3/apa3-account-cred.json
       - gcp-gcr/gcr-auth
       - gcp-gcr/build-image:
           image: apa3-api
