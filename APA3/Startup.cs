@@ -32,6 +32,8 @@ namespace APA3
                 options.Audience = authOptions.Audience;
             });
 
+            services.AddCors();
+
             services.AddGoogleAuthService();
 
             services.AddDriveService();
@@ -64,6 +66,8 @@ namespace APA3
             // app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(options => options.AllowAnyOrigin());
 
             app.UseAuthentication();
 
