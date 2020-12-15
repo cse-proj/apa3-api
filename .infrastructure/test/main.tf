@@ -53,6 +53,30 @@ resource "google_compute_instance" "apa3-api-vm-test" {
   }
 }
 
+resource "google_compute_firewall" "test-http-80" {
+  name    = "test-http-80"
+  network = "apa3-test-vpc"
+
+  allow {
+    protocol = "icmp"
+  }
+
+  allow {
+    protocol = "tcp"
+    ports    = var.port_number
+  }
+}
+
+resource "google_compute_firewall" "apa3-test-vpc-allow-ssh" {
+  name    = "apa3-test-vpc-allow-ssh"
+  network = "apa3-test-vpc"
+
+  allow {
+    protocol = "tcp"
+    ports    = ["22"]
+  }
+}
+
 resource "google_dns_record_set" "apa3-test" {
   name         = "${var.domain}."
   managed_zone = "luzcode"
